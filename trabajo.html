@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Yermix - Juan Villanueva</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    :root {
+      --bg: #0f0f0f;
+      --card: #1c1c1c;
+      --accent: #00bcd4;
+      --text: #f0f0f0;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* Pantalla de bienvenida */
+    .welcome {
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+      transition: opacity 1s ease;
+      position: relative;
+      z-index: 1000;
+    }
+
+    .welcome h1 {
+      font-size: 3em;
+      color: var(--accent);
+      margin-bottom: 20px;
+    }
+
+    .welcome p {
+      font-size: 1.2em;
+      margin-bottom: 40px;
+      max-width: 600px;
+    }
+
+    .welcome button {
+      background-color: var(--accent);
+      color: var(--bg);
+      padding: 15px 30px;
+      border: none;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    .welcome button:hover {
+      background-color: #0097a7;
+      transform: scale(1.05);
+    }
+
+    /* Contenido principal */
+    .main-content {
+      display: none;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    header {
+      background-color: #121212;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 1px solid #333;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      padding: 15px;
+      background-color: #181818;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    nav button {
+      background-color: #2a2a2a;
+      color: var(--text);
+      border: none;
+      padding: 10px 20px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+
+    nav button:hover,
+    nav button.active {
+      background-color: var(--accent);
+      color: var(--bg);
+      transform: translateY(-2px);
+    }
+
+    section {
+      max-width: 900px;
+      margin: 40px auto;
+      background-color: var(--card);
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 0 15px rgba(0,0,0,0.4);
+      display: none;
+      opacity: 0;
+      transition: opacity 0.7s ease;
+      line-height: 1.7;
+    }
+
+    section.activa {
+      display: block;
+      opacity: 1;
+    }
+
+    h2 {
+      color: var(--accent);
+      margin-bottom: 15px;
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    ul li::before {
+      content: "✔ ";
+      color: var(--accent);
+    }
+
+    form input, form textarea {
+      width: 100%;
+      padding: 12px;
+      margin-top: 10px;
+      background-color: #2a2a2a;
+      border: 1px solid #444;
+      color: var(--text);
+      border-radius: 5px;
+    }
+
+    form button {
+      background-color: var(--accent);
+      color: var(--bg);
+      border: none;
+      padding: 12px 20px;
+      margin-top: 15px;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .social {
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    .social a {
+      color: var(--accent);
+      margin: 0 10px;
+      font-size: 1.8em;
+      transition: color 0.3s ease, transform 0.2s ease;
+    }
+
+    .social a:hover {
+      color: #0097a7;
+      transform: scale(1.1);
+    }
+
+    @media (max-width: 600px) {
+      nav {
+        flex-direction: column;
+        align-items: center;
+      }
+      nav button {
+        width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Bienvenida -->
+  <div class="welcome" id="welcome">
+    <h1>Bienvenido a Yermix</h1>
+    <p>Hola, soy <strong>Juan Villanueva</strong>. Este es mi espacio digital donde combino creatividad, desarrollo y diseño para crear experiencias memorables.</p>
+    <button onclick="entrarSitio()">Entrar</button>
+  </div>
+
+  <!-- Contenido principal -->
+  <div class="main-content" id="main">
+    <header>
+      <h1>Yermix - Juan Villanueva</h1>
+      <p>Explora mi portafolio, habilidades, proyectos y más.</p>
+    </header>
+
+    <nav>
+      <button onclick="mostrar('biografia')" class="active">Biografía</button>
+      <button onclick="mostrar('habilidades')">Habilidades</button>
+      <button onclick="mostrar('estudios')">Estudios</button>
+      <button onclick="mostrar('proyectos')">Proyectos</button>
+      <button onclick="mostrar('contacto')">Contacto</button>
+    </nav>
+
+    <section id="biografia" class="activa">
+      <h2>Mi Biografía</h2>
+      <p>Soy <strong>Juan Villanueva</strong>, un apasionado del mundo digital con visión innovadora y siempre buscando aprender cosas nuevas. Me considero una persona creativa, entusiasta y comprometida, que disfruta de los retos tecnológicos y de la construcción de soluciones que aporten valor.</p>
+      <p>Mi enfoque combina lógica y creatividad para generar experiencias únicas, siempre manteniendo la calidad y el detalle como prioridad.</p>
+    </section>
+
+    <section id="habilidades">
+      <h2>Mis Habilidades</h2>
+      <ul>
+        <li>HTML, CSS, JavaScript</li>
+        <li>Desarrollo con Python y PHP</li>
+        <li>Gestión de bases de datos SQL y NoSQL</li>
+        <li>Diseño responsivo y experiencia de usuario (UX/UI)</li>
+        <li>Integración de APIs y creación de sistemas dinámicos</li>
+        <li>Metodologías ágiles: Scrum y Kanban</li>
+      </ul>
+    </section>
+
+    <section id="estudios">
+      <h2>Mis Estudios</h2>
+      <p>Tengo formación sólida en desarrollo web y programación. He participado en bootcamps intensivos, cursos especializados y proyectos colaborativos que me han dado experiencia práctica con tecnologías modernas.</p>
+      <p>Siempre estoy en constante aprendizaje para mantenerme actualizado en las últimas tendencias del mundo digital.</p>
+    </section>
+
+    <section id="proyectos">
+      <h2>Proyectos</h2>
+      <p>He trabajado en aplicaciones web, sistemas interactivos y páginas personalizadas. Mis proyectos abarcan desde portafolios personales hasta herramientas de gestión y sistemas de reservas en línea.</p>
+      <p>Cada proyecto refleja dedicación, creatividad y un compromiso con la innovación.</p>
+    </section>
+
+    <section id="contacto">
+      <h2>Contáctame</h2>
+      <form action="mailto:fmdmejiav@gmail.com" method="post" enctype="text/plain">
+        <label for="nombre">Tu nombre:</label>
+        <input type="text" id="nombre" name="nombre" required>
+
+        <label for="email">Tu correo:</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="mensaje">Mensaje:</label>
+        <textarea id="mensaje" name="mensaje" rows="5" required></textarea>
+
+        <button type="submit">Enviar</button>
+      </form>
+
+      <div class="social">
+        <h3>Mis redes sociales</h3>
+        <a href="https://w.app/hdzjua" target="_blank"><i class="fab fa-whatsapp"></i></a>
+        <a href="https://www.tiktok.com/@f_duran06?is_from_webapp=1&sender_device=pc" target="_blank"><i class="fab fa-tiktok"></i></a>
+        <a href="https://www.facebook.com/fmdmejia.duran/about" target="_blank"><i class="fab fa-facebook"></i></a>
+      </div>
+    </section>
+  </div>
+
+  <script>
+    function entrarSitio() {
+      const welcome = document.getElementById('welcome');
+      const main = document.getElementById('main');
+
+      welcome.style.opacity = '0';
+      setTimeout(() => {
+        welcome.style.display = 'none';
+        main.style.display = 'block';
+        setTimeout(() => {
+          main.style.opacity = '1';
+        }, 50);
+      }, 1000);
+    }
+
+    function mostrar(seccionId) {
+      const botones = document.querySelectorAll("nav button");
+      const secciones = document.querySelectorAll("section");
+
+      botones.forEach(btn => btn.classList.remove("active"));
+      event.target.classList.add("active");
+
+      secciones.forEach(sec => {
+        if (sec.id === seccionId) {
+          sec.classList.add("activa");
+        } else {
+          sec.classList.remove("activa");
+        }
+      });
+    }
+  </script>
+</body>
+</html>
